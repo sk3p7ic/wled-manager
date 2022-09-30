@@ -16,7 +16,7 @@ const HomePage = ({ devices }: HomePageProps) => {
       <h1 className="text-5xl border-b border-b-neutral-100">
         {editMode ? "Edit Device" : "Device List"}
       </h1>
-      <div>
+      <div className="flex flex-col gap-2">
         {devices.map((device, index) => (
           <>
             {editMode ? (
