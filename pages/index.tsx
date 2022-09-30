@@ -1,4 +1,4 @@
-import type { GetServerSidePropsContext, NextPage } from "next";
+import type { GetServerSidePropsContext } from "next";
 import { Device } from "@prisma/client";
 import prisma from "../lib/prisma";
 import { useState } from "react";
