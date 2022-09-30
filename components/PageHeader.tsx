@@ -7,8 +7,8 @@ export const PageHeader = () => {
       <h1 className="text-3xl font-bold text-emerald-600">WLED Manager</h1>
       <div className="flex flex-row gap-4">
         <HeaderLink href="/">Home</HeaderLink>
-        <HeaderLink href="/">Add Device</HeaderLink>
-        <HeaderLink href="/">Device Locations</HeaderLink>
+        <HeaderLink href="/newDevice">Add Device</HeaderLink>
+        <HeaderLink href="/locations">Device Locations</HeaderLink>
       </div>
     </nav>
   );
