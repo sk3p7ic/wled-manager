@@ -2,6 +2,7 @@
   "name": "wled-manager",
   "version": "0.1.0",
   "private": true,
+  "author": "Joshua Ibrom (sk3p7ic)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
