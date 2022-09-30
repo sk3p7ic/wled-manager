@@ -17,12 +17,12 @@ const HomePage = ({ devices }: HomePageProps) => {
         {editMode ? "Edit Device" : "Device List"}
       </h1>
       <div>
-        {devices.map((device) => (
+        {devices.map((device, index) => (
           <>
             {editMode ? (
-              <EditDevice device={device} key={device.id} />
+              <EditDevice device={device} key={index} />
             ) : (
-              <LinkDevice device={device} key={device.id} />
+              <LinkDevice device={device} key={index} />
             )}
           </>
         ))}
@@ -44,12 +44,11 @@ const HomePage = ({ devices }: HomePageProps) => {
 
 type DeviceProps = {
   device: Device;
-  key: number;
 };
 
-const LinkDevice = ({ device, key }: DeviceProps) => {
+const LinkDevice = ({ device }: DeviceProps) => {
   return (
-    <Link href={`http://${device.ip}/`} key={key}>
+    <Link href={`http://${device.ip}/`} key={device.id}>
       <a className="flex flex-row gap-4 py-4 px-8 rounded-sm text-xl bg-neutral-700 hover:bg-violet-600 hover:rounded-xl transition-all">
         <p>{device.ip}</p>
         <p>{device.name}</p>
@@ -58,9 +57,9 @@ const LinkDevice = ({ device, key }: DeviceProps) => {
   );
 };
 
-const EditDevice = ({ device, key }: DeviceProps) => {
+const EditDevice = ({ device }: DeviceProps) => {
   return (
-    <Link href={`/edit/${device.ip}/`} key={key}>
+    <Link href={`/edit/${device.id}/`} key={device.id}>
       <a className="flex flex-row gap-4 py-4 px-8 rounded-sm text-xl bg-neutral-700 hover:bg-violet-600 hover:rounded-xl transition-all">
         <p>{device.ip}</p>
         <p>{device.name}</p>
