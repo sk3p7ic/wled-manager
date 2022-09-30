@@ -3,7 +3,6 @@ import prisma from "../../../lib/prisma";
 
 const handle = async (req: any, res: NextApiResponse) => {
   const { ip, name } = req.body;
-  console.log(ip, name);
   await prisma.device.create({
     data: { ip: ip, name: name, locationX: 50, locationY: 50 },
   });
