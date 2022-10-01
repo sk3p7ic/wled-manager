@@ -7,7 +7,34 @@ type LocationMapProps = {
 };
 
 export const LocationMap = ({ devices }: LocationMapProps) => {
-  const { editMode, toggle: toggleMode, didPosChange, reset } = useMapMode();
+  const {
+    editMode,
+    toggle: toggleMode,
+    didPosChange,
+    reset,
+    devicePositionStates,
+  } = useMapMode();
+
+  const saveChanges = async () => {
+    const deviceMap = new Map(devices.map((dev) => [dev.id, dev]));
+    for await (const [id, coord] of devicePositionStates.entries()) {
+      const device = deviceMap.get(id);
+      if (!device) continue;
+      await fetch(`/api/devices/edit`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...device,
+          locationX: coord.x,
+          locationY: coord.y,
+        }),
+      });
+    }
+    reset();
+    document.location.replace("/locations");
+  };
 
   return (
     <div className="flex-grow flex flex-col">
@@ -24,7 +51,10 @@ export const LocationMap = ({ devices }: LocationMapProps) => {
           )}
         </div>
         {didPosChange && (
-          <button className="mb-1 mt-2 px-4 py-2 bg-neutral-900 hover:bg-emerald-600 transition-all">
+          <button
+            className="mb-1 mt-2 px-4 py-2 bg-neutral-900 hover:bg-emerald-600 transition-all"
+            onClick={() => saveChanges()}
+          >
             Save Changes
           </button>
         )}

@@ -1,4 +1,5 @@
 import React, { ReactNode, useContext, useState } from "react";
+import { Device } from "@prisma/client";
 
 const MapModeContext = React.createContext({
   editMode: false,
@@ -6,6 +7,10 @@ const MapModeContext = React.createContext({
   didPosChange: false,
   setPosChange: () => {},
   reset: () => {},
+  devicePositionStates: new Map<number, { x: number; y: number }>(),
+  editDevicePositionState: (id: number, x: number, y: number) => {},
+  initialDevices: new Map<number, Device>(),
+  setInitialDevices: (devices: Map<number, Device>) => {},
 });
 
 export const useMapMode = () => useContext(MapModeContext);
@@ -19,6 +24,12 @@ export const MapModeContextProvider = ({
 }: MapModeContextProviderProps) => {
   const [editMode, setEditMode] = useState(false);
   const [didPosChange, setPosChange] = useState(false);
+  const [devicePositionStates, setDevicePositionStates] = useState(
+    new Map<number, { x: number; y: number }>()
+  );
+  const [initialDevices, setInitialDevices] = useState(
+    new Map<number, Device>()
+  );
 
   const toggle = () => {
     const curr = editMode;
@@ -35,6 +46,15 @@ export const MapModeContextProvider = ({
     setPosChange(false);
   };
 
+  const editDevicePositionState = (id: number, x: number, y: number) => {
+    const oldMap = devicePositionStates; // Get a copy
+    oldMap.set(id, { x, y });
+    setDevicePositionStates(new Map(oldMap));
+  };
+
+  const setInitialDevicesMethod = (devices: Map<number, Device>) =>
+    setInitialDevices(devices);
+
   return (
     <MapModeContext.Provider
       value={{
@@ -43,6 +63,10 @@ export const MapModeContextProvider = ({
         didPosChange,
         setPosChange: setPosChangeMethod,
         reset,
+        devicePositionStates,
+        editDevicePositionState,
+        initialDevices,
+        setInitialDevices: setInitialDevicesMethod,
       }}
     >
       {children}

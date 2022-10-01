@@ -1,5 +1,6 @@
 import { Device } from "@prisma/client";
 import React, { useState, useEffect } from "react";
+import { useMapMode } from "../../contexts/MapModeContext";
 import { useSelectedMapDevice } from "../../contexts/SelectedMapDevice";
 
 type MapDisplayNodeProps = {
@@ -31,6 +32,7 @@ export const MapDisplayNode = ({
   }, [node.ip]);
 
   const { device, setDevice } = useSelectedMapDevice();
+  const { editDevicePositionState } = useMapMode();
 
   const validateMaxDimen = (
     top: number,
@@ -73,8 +75,10 @@ export const MapDisplayNode = ({
         prevX = e.clientX;
         prevY = e.clientY;
         const coords = toPercentCoords(element);
-        if (coords.x !== node.locationX && coords.y !== node.locationY)
+        if (coords.x !== node.locationX && coords.y !== node.locationY) {
           onPosChange();
+          editDevicePositionState(node.id, coords.x, coords.y);
+        }
       };
     };
   };
