@@ -2,6 +2,7 @@ import { Device } from "@prisma/client";
 import React, { useEffect, useState } from "react";
 import { useMapMode } from "../../contexts/MapModeContext";
 import { MapDisplayNode } from "./MapDisplayNode";
+import MapImage from "../../public/map.jpg";
 
 type MapDisplayProps = {
   nodes: Device[];
@@ -21,7 +22,14 @@ export const MapDisplay = ({ nodes }: MapDisplayProps) => {
   }, [mapRef.current]);
 
   return (
-    <div className="flex-grow relative" ref={mapRef}>
+    <div
+      className="flex-grow relative"
+      ref={mapRef}
+      style={{
+        backgroundImage: "url('/map.jpg')",
+        backgroundSize: "100% 100%",
+      }}
+    >
       {nodes.map((node) => (
         <MapDisplayNode
           node={node}

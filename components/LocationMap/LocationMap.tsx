@@ -39,7 +39,9 @@ export const LocationMap = ({ devices }: LocationMapProps) => {
   return (
     <div className="flex-grow flex flex-col">
       <div className="px-4 pt-3 flex flex-row items-end gap-4 border-b border-b-neutral-100">
-        <h1 className="mt-5 text-2xl font-bold">Device Locations</h1>
+        <h1 className="mt-5 text-2xl font-bold">
+          {editMode ? "Edit " : ""}Device Locations
+        </h1>
         <div className="flex-grow">
           {!editMode && (
             <button
