@@ -3,6 +3,7 @@ import { Device } from "@prisma/client";
 import prisma from "../lib/prisma";
 import { useState } from "react";
 import Link from "next/link";
+import { StatusIndicator } from "../components/StatusIndicator";
 
 type HomePageProps = {
   devices: Device[];
@@ -49,7 +50,8 @@ type DeviceProps = {
 const LinkDevice = ({ device }: DeviceProps) => {
   return (
     <Link href={`http://${device.ip}/`} key={device.id}>
-      <a className="flex flex-row gap-4 py-4 px-8 rounded-sm text-xl bg-neutral-700 hover:bg-violet-600 hover:rounded-xl transition-all">
+      <a className="flex flex-row items-center gap-4 py-4 px-8 rounded-sm text-xl bg-neutral-700 hover:bg-violet-600 hover:rounded-xl transition-all">
+        <StatusIndicator ip={device.ip} />
         <p>{device.ip}</p>
         <p>{device.name}</p>
       </a>
@@ -60,7 +62,8 @@ const LinkDevice = ({ device }: DeviceProps) => {
 const EditDevice = ({ device }: DeviceProps) => {
   return (
     <Link href={`/edit/${device.id}/`} key={device.id}>
-      <a className="flex flex-row gap-4 py-4 px-8 rounded-sm text-xl bg-neutral-700 hover:bg-violet-600 hover:rounded-xl transition-all">
+      <a className="flex flex-row items-center gap-4 py-4 px-8 rounded-sm text-xl bg-neutral-700 hover:bg-violet-600 hover:rounded-xl transition-all">
+        <StatusIndicator ip={device.ip} />
         <p>{device.ip}</p>
         <p>{device.name}</p>
       </a>

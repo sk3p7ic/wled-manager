@@ -12,3 +12,5 @@ const handle = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   res.json({ up: status });
 };
+
+export default handle;
