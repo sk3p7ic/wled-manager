@@ -18,7 +18,7 @@ export const MapDisplay = ({ nodes }: MapDisplayProps) => {
         w: mapRef.current.clientWidth,
         h: mapRef.current.clientHeight,
       });
-  }, [mapRef]);
+  }, [mapRef.current]);
 
   return (
     <div className="flex-grow relative" ref={mapRef}>
