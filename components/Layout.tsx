@@ -19,7 +19,10 @@ export const Layout = ({ children }: LayoutProps) => {
       <div ref={headerRef}>
         <PageHeader />
       </div>
-      <main className="min-h-screen" style={{ paddingTop: navHeight + "px" }}>
+      <main
+        className="min-h-screen flex"
+        style={{ paddingTop: navHeight + "px" }}
+      >
         {children}
       </main>
     </>
