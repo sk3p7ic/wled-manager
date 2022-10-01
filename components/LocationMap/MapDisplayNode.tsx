@@ -39,7 +39,7 @@ export const MapDisplayNode = ({
     height: number
   ): Boolean => {
     const dimen = mapSize;
-    return top + height <= dimen.h && left + width <= dimen.w;
+    return top + height * 2.5 <= dimen.h && left + width * 2 <= dimen.w;
   };
 
   const enableDragging = (element: HTMLElement) => {
